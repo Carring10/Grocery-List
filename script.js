@@ -6,17 +6,42 @@ function appendListItem() {
   itemForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const listItem = document.createElement("li");
-    listItem.innerHTML = itemInput.value;
-    listItemsContainer.appendChild(listItem);
-    console.log(listItem);
-
-    const listItemsArray = JSON.parse(localStorage.getItem("listItems"));
-    listItemsArray.push(itemInput.value);
-    localStorage.setItem("listItems", JSON.stringify(listItemsArray));
+    let listItems = JSON.parse(localStorage.getItem("listItems"));
+    if (listItems) {
+      const itemObject = {
+        groceryItem: itemInput.value,
+        isCheckedOff: false,
+      };
+      listItems.push(itemObject);
+      localStorage.setItem("listItems", JSON.stringify(listItems));
+      for (let i = 0; i < listItems.length; i++) {
+        console.log(listItems[i]);
+        const groceryListItem = document.createElement("li");
+        groceryListItem.innerText = listItems[i].groceryItem;
+        listItemsContainer.appendChild(groceryListItem);
+      }
+    } else {
+      const listItemsArray = [];
+      const itemObject = {
+        groceryItem: itemInput.value,
+        isCheckedOff: false,
+      };
+      listItemsArray.push(itemObject);
+      localStorage.setItem("listItems", JSON.stringify(listItemsArray));
+    }
 
     itemInput.value = "";
   });
 }
 
 appendListItem();
+
+/* 
+ [
+   {
+       value: 'tomatoes',
+       checkedOff: false,
+       category: 'veggies'
+   }
+ ]
+*/

@@ -18,7 +18,6 @@ function appendListItem() {
     isCheckedOff: false,
     groceryItem: itemInput.value,
   };
-
   listItemsArray.push(itemObject);
   localStorage.setItem("listItems", JSON.stringify(listItemsArray));
 
@@ -30,15 +29,8 @@ function appendListItem() {
 
 function getStoredItems() {
   let listItems = JSON.parse(localStorage.getItem("listItems"));
-  // if (listItems) {
-  //   const itemObject = {
-  //     isCheckedOff: false,
-  //     groceryItem: itemInput.value,
-  //   };
-
-  //   listItems.push(itemObject);
-  //   localStorage.setItem("listItems", JSON.stringify(listItems));
   if (listItems) {
+    listItemsArray.push(...listItems);
     for (let i = 0; i < listItems.length; i++) {
       const groceryListItem = document.createElement("li");
       groceryListItem.setAttribute("id", i);
@@ -50,6 +42,7 @@ function getStoredItems() {
       listItemsContainer.appendChild(groceryListItem);
     }
   }
+  console.log(listItemsArray);
 }
 
 getStoredItems();

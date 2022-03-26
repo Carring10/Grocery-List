@@ -24,6 +24,13 @@ function appendListItem() {
   const groceryListItem = document.createElement("li");
   groceryListItem.setAttribute("id", "0");
   groceryListItem.innerText = itemInput.value;
+
+  groceryListItem.addEventListener("click", function (event) {
+    if (event.target) {
+      groceryListItem.classList.add("checked-off");
+    }
+  });
+
   listItemsContainer.appendChild(groceryListItem);
 }
 
@@ -39,6 +46,13 @@ function getStoredItems() {
       if (oldListItem) listItemsContainer.replaceChild(groceryListItem, oldListItem);
 
       groceryListItem.innerText = listItems[i].groceryItem;
+
+      groceryListItem.addEventListener("click", function (event) {
+        if (event.target) {
+          groceryListItem.classList.add("checked-off");
+        }
+      });
+
       listItemsContainer.appendChild(groceryListItem);
     }
   }

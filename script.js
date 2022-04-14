@@ -27,6 +27,8 @@ function appendListItem() {
 
   groceryListItem.addEventListener("click", function (event) {
     if (event.target) {
+      console.log(listItemsArray);
+      itemObject.isCheckedOff = true;
       groceryListItem.classList.add("checked-off");
     }
   });
